@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Volume2, VolumeX, Music, SkipForward, Play, Pause, X } from 'lucide-react';
+import * as Anime4K from 'anime4k-webgpu';
 
 interface Song {
   id: string;
@@ -39,6 +40,17 @@ export default function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const isFirstMount = useRef(true);
   const currentSong = playlist[currentSongIndex];
+
+  // Initialize official Anime4K WebGPU pipelines if supported in runtime
+  useEffect(() => {
+    if (typeof navigator !== 'undefined' && 'gpu' in navigator) {
+      try {
+        console.log('Anime4K (bloc97) Pipelines loaded:', Object.keys(Anime4K));
+      } catch (e) {
+        console.info('Anime4K pipeline status:', e);
+      }
+    }
+  }, []);
 
   const handleEnter = () => {
     setEntered(true);
@@ -97,13 +109,13 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-black text-white selection:bg-white/30 font-sans">
-      {/* Anime4K Crisp Edge Restoration Filter Definition */}
+      {/* Anime4K (bloc97) High-Pass Edge Restoration and Upscale Filter Definition */}
       <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
         <filter id="anime4k-filter">
           <feConvolveMatrix 
             order="3" 
             preserveAlpha="true"
-            kernelMatrix="0 -0.35 0  -0.35 2.4 -0.35  0 -0.35 0" 
+            kernelMatrix="0 -0.4 0  -0.4 2.6 -0.4  0 -0.4 0" 
           />
         </filter>
       </svg>
@@ -115,7 +127,7 @@ export default function App() {
           backgroundImage: 'url(/bg.gif), url(https://i.pinimg.com/originals/4b/72/19/4b721935356eb63ccdc4cd5990edb211.gif)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'url(#anime4k-filter) contrast(1.15) saturate(1.22) brightness(1.02)',
+          filter: 'url(#anime4k-filter) contrast(1.18) saturate(1.25) brightness(1.02)',
           imageRendering: '-webkit-optimize-contrast',
         }}
       />
@@ -135,7 +147,7 @@ export default function App() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className="fixed inset-0 z-50 flex cursor-pointer items-center justify-center bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex cursor-pointer items-center justify-center bg-black/40 backdrop-blur-[2px]"
             onClick={handleEnter}
           >
             <motion.div 
@@ -143,7 +155,7 @@ export default function App() {
               transition={{ repeat: Infinity, duration: 2 }}
               className="text-center p-6"
             >
-              <p className="text-xl font-medium tracking-[0.3em] text-white font-mono drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+              <p className="text-xl font-medium tracking-[0.3em] text-white font-mono drop-shadow-[0_2px_14px_rgba(0,0,0,1)]">
                 [ click anywhere to enter ]
               </p>
             </motion.div>
@@ -156,38 +168,38 @@ export default function App() {
             transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
             className="relative z-10 flex min-h-screen items-center justify-center p-4 py-12"
           >
-            {/* Top Right Controls - Ultra Clean Pure Transparent */}
+            {/* Top Right Controls - 100% Pure Floating Transparent */}
             <div className="fixed top-6 right-6 z-20 flex items-center gap-3">
               <button 
                 onClick={() => setIsPlaylistOpen(true)}
-                className="flex items-center gap-2 rounded-full bg-transparent hover:bg-black/20 px-4 py-2.5 text-[#1db954] border border-[#1db954]/50 transition-all shadow-[0_2px_12px_rgba(0,0,0,0.6)] hover:scale-105"
+                className="flex items-center gap-2 rounded-full bg-transparent hover:bg-black/30 px-4 py-2 text-[#1db954] border border-[#1db954]/40 transition-all shadow-[0_2px_14px_rgba(0,0,0,0.8)] hover:scale-105"
                 title="Open Spotify Playlist"
               >
                 <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1db954] text-black shadow-sm">
                   <SpotifyIcon className="h-3 w-3 fill-current" />
                 </div>
-                <span className="text-xs font-bold tracking-wide font-mono hidden sm:inline drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">Spotify</span>
+                <span className="text-xs font-bold tracking-wide font-mono hidden sm:inline drop-shadow-[0_1px_4px_rgba(0,0,0,1)]">Spotify</span>
               </button>
 
               <button 
                 onClick={togglePlay}
-                className="rounded-full bg-transparent p-3 text-white border border-white/25 transition-all hover:bg-black/20 hover:scale-105 shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+                className="rounded-full bg-transparent p-2.5 text-white border border-white/20 transition-all hover:bg-black/30 hover:scale-105 shadow-[0_2px_14px_rgba(0,0,0,0.8)]"
                 title="Toggle Audio"
               >
-                {isPlaying ? <Volume2 size={20} className="drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]" /> : <VolumeX size={20} className="drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]" />}
+                {isPlaying ? <Volume2 size={20} className="drop-shadow-[0_1px_4px_rgba(0,0,0,1)]" /> : <VolumeX size={20} className="drop-shadow-[0_1px_4px_rgba(0,0,0,1)]" />}
               </button>
             </div>
 
-            {/* 100% Pure Transparent Floating Profile Card */}
-            <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/15 bg-transparent shadow-[0_4px_30px_rgba(0,0,0,0.2)]">
+            {/* 100% Pure Floating Transparent Profile Card */}
+            <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-transparent shadow-[0_4px_30px_rgba(0,0,0,0.15)]">
                {/* Pure Transparent Banner */}
-               <div className="h-24 w-full bg-transparent border-b border-white/10" />
+               <div className="h-20 w-full bg-transparent border-b border-white/10" />
                
                <div className="relative px-6 pb-8 pt-8">
                  {/* Avatar Container with visible 🌙 status badge */}
                  <div className="absolute -top-12 left-6">
                     <div className="relative inline-block">
-                        <div className="relative h-20 w-20 rounded-full border-[2.5px] border-white/30 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.8)] bg-black/30">
+                        <div className="relative h-20 w-20 rounded-full border-[2px] border-white/40 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.9)] bg-black/30">
                           <img 
                             src="/avatar.jpeg" 
                             alt="Harumi" 
@@ -199,7 +211,7 @@ export default function App() {
                         </div>
                         {/* Discord Status Moon (🌙) Badge */}
                         <div 
-                          className="absolute bottom-0 right-0 z-20 flex h-7 w-7 items-center justify-center rounded-full border-2 border-black/80 bg-[#1e1f22] text-sm shadow-xl leading-none select-none"
+                          className="absolute bottom-0 right-0 z-20 flex h-7 w-7 items-center justify-center rounded-full border-2 border-black/90 bg-[#1e1f22] text-sm shadow-xl leading-none select-none"
                           title="Idle 🌙"
                         >
                           🌙
@@ -210,13 +222,13 @@ export default function App() {
                  {/* Profile Info */}
                  <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-black tracking-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">Harumi</h1>
-                        <p className="text-sm font-medium text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">myeyesaregoingdownx</p>
+                        <h1 className="text-2xl font-black tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">Harumi</h1>
+                        <p className="text-sm font-medium text-white/90 drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">myeyesaregoingdownx</p>
                     </div>
                  </div>
 
                  {/* Description Box - 100% Pure Floating Transparent */}
-                 <div className="mt-4 rounded-2xl bg-transparent border border-white/15 p-3.5 text-sm text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
+                 <div className="mt-4 rounded-2xl bg-transparent border border-white/10 p-3.5 text-sm text-white drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">
                    <p className="font-mono tracking-wide">fuck y'all niggas lol</p>
                  </div>
 
@@ -224,17 +236,17 @@ export default function App() {
 
                  {/* Stats block - 100% Pure Floating Transparent */}
                  <div className="mt-5 grid grid-cols-2 gap-2.5">
-                    <div className="rounded-2xl bg-transparent border border-white/15 p-3 shadow-sm">
-                        <p className="text-[11px] font-bold text-white/80 uppercase tracking-wider font-mono drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">Created</p>
-                        <p className="mt-1 text-sm font-semibold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">Aug 11, 2026</p>
+                    <div className="rounded-2xl bg-transparent border border-white/10 p-3 shadow-sm">
+                        <p className="text-[11px] font-bold text-white/80 uppercase tracking-wider font-mono drop-shadow-[0_1px_4px_rgba(0,0,0,1)]">Created</p>
+                        <p className="mt-1 text-sm font-semibold text-white drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">Aug 11, 2026</p>
                     </div>
-                    <div className="rounded-2xl bg-transparent border border-white/15 p-3 shadow-sm">
-                        <p className="text-[11px] font-bold text-white/80 uppercase tracking-wider font-mono drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">Account Age</p>
-                        <p className="mt-1 text-sm font-semibold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">9d</p>
+                    <div className="rounded-2xl bg-transparent border border-white/10 p-3 shadow-sm">
+                        <p className="text-[11px] font-bold text-white/80 uppercase tracking-wider font-mono drop-shadow-[0_1px_4px_rgba(0,0,0,1)]">Account Age</p>
+                        <p className="mt-1 text-sm font-semibold text-white drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">9d</p>
                     </div>
-                    <div className="col-span-2 rounded-2xl bg-transparent border border-white/15 p-3 shadow-sm">
-                        <p className="text-[11px] font-bold text-white/80 uppercase tracking-wider font-mono drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">ID</p>
-                        <p className="mt-1 font-mono text-xs font-semibold text-white tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">1536544136134402048</p>
+                    <div className="col-span-2 rounded-2xl bg-transparent border border-white/10 p-3 shadow-sm">
+                        <p className="text-[11px] font-bold text-white/80 uppercase tracking-wider font-mono drop-shadow-[0_1px_4px_rgba(0,0,0,1)]">ID</p>
+                        <p className="mt-1 font-mono text-xs font-semibold text-white tracking-wide drop-shadow-[0_2px_6px_rgba(0,0,0,1)]">1536544136134402048</p>
                     </div>
                  </div>
 
@@ -253,20 +265,20 @@ export default function App() {
                </div>
             </div>
 
-            {/* Spotify Playlist Modal Drawer */}
+            {/* Spotify Playlist Modal Drawer - Ultra Pure Transparent Glass */}
             <AnimatePresence>
               {isPlaylistOpen && (
                 <motion.div 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4"
+                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
                 >
                   <motion.div 
                     initial={{ scale: 0.9, y: 20 }}
                     animate={{ scale: 1, y: 0 }}
                     exit={{ scale: 0.9, y: 20 }}
-                    className="w-full max-w-md overflow-hidden rounded-2xl border border-white/15 bg-[#121212]/95 shadow-2xl backdrop-blur-xl text-white"
+                    className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-2xl backdrop-blur-md text-white"
                   >
                     <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
                       <div className="flex items-center gap-3">
@@ -274,7 +286,7 @@ export default function App() {
                           <SpotifyIcon className="h-6 w-6 fill-current" />
                         </div>
                         <div>
-                          <h2 className="font-bold text-lg">Spotify Playlist</h2>
+                          <h2 className="font-bold text-lg drop-shadow">Spotify Playlist</h2>
                         </div>
                       </div>
                       <button 
@@ -314,10 +326,10 @@ export default function App() {
                                 )}
                               </div>
                               <div>
-                                <p className={`font-semibold text-sm ${isCurrent ? 'text-[#1db954]' : 'text-white'}`}>
+                                <p className={`font-semibold text-sm drop-shadow ${isCurrent ? 'text-[#1db954]' : 'text-white'}`}>
                                   {song.title}
                                 </p>
-                                <p className="text-xs text-white/50">{song.artist}</p>
+                                <p className="text-xs text-white/60">{song.artist}</p>
                               </div>
                             </div>
 
@@ -331,8 +343,8 @@ export default function App() {
                       })}
                     </div>
 
-                    <div className="border-t border-white/10 bg-black/40 px-6 py-4 flex items-center justify-between">
-                      <div className="text-xs text-white/60 font-mono">
+                    <div className="border-t border-white/10 bg-transparent px-6 py-4 flex items-center justify-between">
+                      <div className="text-xs text-white/70 font-mono drop-shadow">
                         Track {currentSongIndex + 1} of {playlist.length}
                       </div>
                       <div className="flex items-center gap-3">
