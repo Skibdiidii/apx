@@ -170,15 +170,15 @@ export default function App() {
             </div>
 
             {/* 100% Pure Transparent Profile Card */}
-            <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/20 bg-transparent shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+            <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/20 bg-transparent shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
                {/* Pure Transparent Banner */}
-               <div className="h-28 w-full bg-transparent border-b border-white/10" />
+               <div className="h-28 w-full bg-gradient-to-b from-white/10 via-transparent to-transparent border-b border-white/10" />
                
                <div className="relative px-6 pb-8 pt-10">
-                 {/* Avatar Container with visible status badge */}
+                 {/* Avatar Container with visible 🌙 status badge */}
                  <div className="absolute -top-12 left-6">
                     <div className="relative inline-block">
-                        <div className="relative h-20 w-20 rounded-full border-[3px] border-white/20 overflow-hidden shadow-2xl bg-black/40">
+                        <div className="relative h-20 w-20 rounded-full border-[3px] border-white/30 overflow-hidden shadow-2xl bg-black/40">
                           <img 
                             src="/avatar.jpeg" 
                             alt="Harumi" 
@@ -188,12 +188,12 @@ export default function App() {
                             }}
                           />
                         </div>
-                        {/* Discord Status Moon (Idle 🌙) Badge positioned prominently outside overflow */}
+                        {/* Discord Status Moon (🌙) Badge */}
                         <div 
-                          className="absolute -bottom-1 -right-1 z-20 flex h-7 w-7 items-center justify-center rounded-full border-2 border-black/80 bg-[#1e1f22] shadow-lg"
+                          className="absolute bottom-0 right-0 z-20 flex h-7 w-7 items-center justify-center rounded-full border-2 border-[#1e1f22] bg-[#1e1f22] text-sm shadow-xl leading-none select-none"
                           title="Idle 🌙"
                         >
-                          <span className="text-sm select-none leading-none">🌙</span>
+                          🌙
                         </div>
                     </div>
                  </div>
@@ -202,7 +202,7 @@ export default function App() {
                  <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-2xl font-black tracking-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Harumi</h1>
-                        <p className="text-sm font-medium text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">myeyesaregoingdownx</p>
+                        <p className="text-sm font-medium text-white/85 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">myeyesaregoingdownx</p>
                     </div>
                  </div>
 
@@ -223,7 +223,7 @@ export default function App() {
                         <p className="text-[11px] font-bold text-white/70 uppercase tracking-wider font-mono drop-shadow">Account Age</p>
                         <p className="mt-1 text-sm font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">9d</p>
                     </div>
-                    <div className="col-span-2 rounded-2xl bg-transparent border border-white/10 p-3 shadow-sm">
+                    <div className="col-span-2 rounded-2xl bg-transparent border border-white/15 p-3 shadow-sm">
                         <p className="text-[11px] font-bold text-white/70 uppercase tracking-wider font-mono drop-shadow">ID</p>
                         <p className="mt-1 font-mono text-xs font-semibold text-white/95 tracking-wide drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">1536544136134402048</p>
                     </div>
