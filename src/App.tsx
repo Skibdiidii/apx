@@ -169,31 +169,31 @@ export default function App() {
               </button>
             </div>
 
-            {/* Ultra Transparent Glass Profile Card */}
-            <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-black/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] backdrop-blur-2xl">
-               {/* Translucent Banner */}
-               <div className="h-32 w-full bg-gradient-to-b from-white/10 via-transparent to-transparent border-b border-white/5" />
+            {/* 100% Pure Transparent Profile Card */}
+            <div className="w-full max-w-md overflow-hidden rounded-3xl border border-white/20 bg-transparent shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+               {/* Pure Transparent Banner */}
+               <div className="h-28 w-full bg-transparent border-b border-white/10" />
                
                <div className="relative px-6 pb-8 pt-10">
-                 {/* Avatar */}
+                 {/* Avatar Container with visible status badge */}
                  <div className="absolute -top-12 left-6">
-                    <div className="relative rounded-full border-[4px] border-white/10 bg-black/30 backdrop-blur-xl shadow-2xl overflow-hidden">
-                        <img 
-                          src="/avatar.jpeg" 
-                          alt="Harumi" 
-                          className="h-20 w-20 rounded-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = "https://avatars.githubusercontent.com/u/176057091?v=4";
-                          }}
-                        />
-                        {/* Discord Idle Status Moon Badge */}
+                    <div className="relative inline-block">
+                        <div className="relative h-20 w-20 rounded-full border-[3px] border-white/20 overflow-hidden shadow-2xl bg-black/40">
+                          <img 
+                            src="/avatar.jpeg" 
+                            alt="Harumi" 
+                            className="h-full w-full object-cover"
+                            onError={(e) => {
+                              e.currentTarget.src = "/274b0594-1905-4f0d-82da-07dc87d2430e.jpeg";
+                            }}
+                          />
+                        </div>
+                        {/* Discord Status Moon (Idle 🌙) Badge positioned prominently outside overflow */}
                         <div 
-                          className="absolute bottom-0 right-0 flex h-6 w-6 items-center justify-center rounded-full border-[2.5px] border-[#111214] bg-[#111214] shadow-md"
-                          title="Idle"
+                          className="absolute -bottom-1 -right-1 z-20 flex h-7 w-7 items-center justify-center rounded-full border-2 border-black/80 bg-[#1e1f22] shadow-lg"
+                          title="Idle 🌙"
                         >
-                          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-[#f0b232]">
-                            <path d="M11.5 8C11.5 11.0376 9.03757 13.5 6 13.5C4.78652 13.5 3.66699 13.1077 2.76025 12.4431C3.60627 13.9877 5.23469 15 7.125 15C9.81739 15 12 12.8174 12 10.125C12 8.23469 10.9877 6.60627 9.44312 5.76025C10.667 6.66699 11.5 7.78652 11.5 8Z" />
-                          </svg>
+                          <span className="text-sm select-none leading-none">🌙</span>
                         </div>
                     </div>
                  </div>
@@ -201,31 +201,31 @@ export default function App() {
                  {/* Profile Info */}
                  <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-black tracking-tight text-white drop-shadow-md">Harumi</h1>
-                        <p className="text-sm font-medium text-white/80 drop-shadow">myeyesaregoingdownx</p>
+                        <h1 className="text-2xl font-black tracking-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Harumi</h1>
+                        <p className="text-sm font-medium text-white/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">myeyesaregoingdownx</p>
                     </div>
                  </div>
 
-                 {/* Description Box */}
-                 <div className="mt-4 rounded-2xl bg-white/[0.04] border border-white/10 p-3.5 text-sm text-white/95 backdrop-blur-md shadow-inner">
+                 {/* Description Box - 100% Pure Transparent */}
+                 <div className="mt-4 rounded-2xl bg-transparent border border-white/15 p-3.5 text-sm text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                    <p className="font-mono tracking-wide">fuck y'all niggas lol</p>
                  </div>
 
-                 <div className="mt-5 h-[1px] w-full bg-white/5" />
+                 <div className="mt-5 h-[1px] w-full bg-white/10" />
 
-                 {/* Stats block */}
+                 {/* Stats block - 100% Pure Transparent */}
                  <div className="mt-5 grid grid-cols-2 gap-2.5">
-                    <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-3 backdrop-blur-md shadow-sm">
-                        <p className="text-[11px] font-bold text-white/70 uppercase tracking-wider font-mono">Created</p>
-                        <p className="mt-1 text-sm font-semibold text-white drop-shadow">Aug 11, 2026</p>
+                    <div className="rounded-2xl bg-transparent border border-white/15 p-3 shadow-sm">
+                        <p className="text-[11px] font-bold text-white/70 uppercase tracking-wider font-mono drop-shadow">Created</p>
+                        <p className="mt-1 text-sm font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">Aug 11, 2026</p>
                     </div>
-                    <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-3 backdrop-blur-md shadow-sm">
-                        <p className="text-[11px] font-bold text-white/70 uppercase tracking-wider font-mono">Account Age</p>
-                        <p className="mt-1 text-sm font-semibold text-white drop-shadow">9d</p>
+                    <div className="rounded-2xl bg-transparent border border-white/15 p-3 shadow-sm">
+                        <p className="text-[11px] font-bold text-white/70 uppercase tracking-wider font-mono drop-shadow">Account Age</p>
+                        <p className="mt-1 text-sm font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">9d</p>
                     </div>
-                    <div className="col-span-2 rounded-2xl bg-white/[0.04] border border-white/10 p-3 backdrop-blur-md shadow-sm">
-                        <p className="text-[11px] font-bold text-white/70 uppercase tracking-wider font-mono">ID</p>
-                        <p className="mt-1 font-mono text-xs font-semibold text-white/95 tracking-wide drop-shadow">1536544136134402048</p>
+                    <div className="col-span-2 rounded-2xl bg-transparent border border-white/10 p-3 shadow-sm">
+                        <p className="text-[11px] font-bold text-white/70 uppercase tracking-wider font-mono drop-shadow">ID</p>
+                        <p className="mt-1 font-mono text-xs font-semibold text-white/95 tracking-wide drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">1536544136134402048</p>
                     </div>
                  </div>
 
@@ -234,7 +234,7 @@ export default function App() {
                     href="https://discord.com/users/1536544136134402048"
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-2xl bg-[#5865F2]/90 backdrop-blur-md py-3 font-bold text-white shadow-[0_4px_25px_rgba(88,101,242,0.5)] transition-all hover:bg-[#5865F2] hover:scale-[1.02] active:scale-[0.98] border border-white/10"
+                    className="mt-6 flex w-full items-center justify-center gap-2.5 rounded-2xl bg-[#5865F2]/80 py-3 font-bold text-white shadow-[0_4px_25px_rgba(88,101,242,0.5)] transition-all hover:bg-[#5865F2] hover:scale-[1.02] active:scale-[0.98] border border-white/10"
                  >
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 127.14 96.36" fill="currentColor">
                         <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.2,46,96.09,53,91.04,65.69,84.69,65.69Z"/>
