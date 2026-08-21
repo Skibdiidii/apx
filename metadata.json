@@ -1,0 +1,6 @@
+{
+  "name": "Harumi's Bio",
+  "description": "A personal link-in-bio page for Discord.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
